@@ -34,31 +34,12 @@ from graphs.orchestrator_graph import orchestrator_graph
 TASKS_JSON: str = """
 [
     {
-        "id": "task_001",
-        "description": "Prendi la metro da Milano Centrale a Milano Gioia",
-        "transport_mode": "metro",
-        "origin": "Milano Centrale",
-        "destination": "Milano Gioia",
-        "preferred_time": "08:30",
-        "constraints": ["accessibility_required"]
-    },
-    {
-        "id": "task_002",
-        "description": "Prendi il tram dalla fermata Loreto a Piazza Duomo",
-        "transport_mode": "tram",
-        "origin": "Loreto",
-        "destination": "Piazza Duomo",
-        "preferred_time": "09:15",
-        "constraints": []
-    },
-    {
-        "id": "task_003",
-        "description": "Noleggia una bici condivisa da Porta Venezia per 30 minuti",
-        "transport_mode": "bike_sharing",
-        "origin": "Porta Venezia",
-        "destination": null,
-        "duration_minutes": 30,
-        "constraints": ["electric_preferred"]
+        "id": "task_1",
+        "description": "Given these coordinates, I would like to get the correct address: (45.4845, 9.2040).",
+        "coverage": null,
+        "constraints": null,
+        "inputs": "Coordinates in format (latitude, longitude).",
+        "expected_output": "The correct address corresponding to the provided coordinates."
     }
 ]
 """

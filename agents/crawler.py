@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup
 from tavily import TavilyClient
 
 from schemas import WorkerState
-from config import build_llm_from_model_and_temperature, tavily_api_key
+from config import build_llm_from_model_and_temperature #tavily_api_key
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; CleanScraper/1.0)"
@@ -133,8 +133,6 @@ def extract_internal_links(html: str, base_url: str) -> List[str]:
             links.add(full.split("#")[0])
 
     return list(links)
-
-
 
 def crawl_docs(seed_url: str) -> List[dict]:
     global visited

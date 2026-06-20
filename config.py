@@ -8,6 +8,8 @@ lm_studio_host = os.getenv("LM_STUDIO_HOST", "")
 lm_studio_api_key = os.getenv("LM_STUDIO_API_KEY", "")
 tavily_api_key = os.getenv("TAVILY_API_KEY", "")
 mongo_uri = os.getenv("MONGO_URI", "")
+testing_mode = os.getenv("TESTING_MODE", False)
+testing_mode_agents = os.getenv("TESTING_MODE_AGENTS", "").split(",")
 
 def build_llm_from_model_and_temperature(model_name: str, temperature: float) -> ChatOpenAI:
     return ChatOpenAI(
