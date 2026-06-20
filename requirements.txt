@@ -1,0 +1,8 @@
+langchain>=0.3.0
+langchain-openai>=0.2.0
+langchain-core>=0.3.0
+langgraph>=0.2.0
+pydantic>=2.0.0
+typing-extensions>=4.0.0
+pymongo>=4.0.0
+tavily>=0.1.0
