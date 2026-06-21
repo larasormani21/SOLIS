@@ -67,7 +67,6 @@ def dispatch_to_worker(state: OrchestratorState) -> dict:
         "current_task":        task,
         "query_result":        None,
         "no_service_found":    False,
-        "router_decision":     None,
         "service_description": None,
         "selected_service":    None,
         "code_snippet":        None,

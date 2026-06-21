@@ -1,23 +1,3 @@
-"""
-main.py – MAS Mobility Entry Point
-═══════════════════════════════════════════════════════════════
-
-Feeds an ordered JSON list of mobility tasks to the Orchestrator
-graph and prints the aggregated results, including the auto-
-generated code snippet for every task.
-
-Usage
-─────
-    # From the project root (directory containing mas_mobility/):
-    python -m mas_mobility.main
-
-    # Or directly:
-    python mas_mobility/main.py
-
-Optional: visualise the LangGraph topologies as Mermaid diagrams
-    python -m mas_mobility.main --draw
-"""
-
 from __future__ import annotations
 
 import json
@@ -26,10 +6,6 @@ import sys
 from schemas import OrchestratorState
 from graphs.orchestrator_graph import orchestrator_graph
 
-
-# ══════════════════════════════════════════════════════════════
-# Example Input – ordered mobility tasks (JSON)
-# ══════════════════════════════════════════════════════════════
 
 TASKS_JSON: str = """
 [
@@ -43,11 +19,6 @@ TASKS_JSON: str = """
     }
 ]
 """
-
-
-# ══════════════════════════════════════════════════════════════
-# Helpers
-# ══════════════════════════════════════════════════════════════
 
 def _banner(text: str, width: int = 62) -> None:
     print("\n╔" + "═" * width + "╗")
@@ -90,28 +61,10 @@ def draw_graphs() -> None:
         print(f"[Visualise] PNG rendering skipped: {exc}")
 
 
-# ══════════════════════════════════════════════════════════════
-# Main
-# ══════════════════════════════════════════════════════════════
-
 def main(tasks_json: str = TASKS_JSON) -> dict:
-    """
-    Run the MAS Mobility orchestration pipeline.
-
-    Parameters
-    ----------
-    tasks_json : str
-        JSON string containing an ordered list of mobility tasks.
-        Each task must have at minimum an 'id' and 'description' field.
-
-    Returns
-    -------
-    dict
-        The final OrchestratorState after all tasks are processed.
-    """
     tasks: list[dict] = json.loads(tasks_json)
 
-    _banner(f"MAS Mobility  │  Orchestrator-Workers  │  tasks={len(tasks)}")
+    _banner(f"SOLIS         │  Orchestrator-Workers  │  tasks={len(tasks)}")
 
     initial_state: OrchestratorState = {
         "tasks":               tasks,
@@ -120,10 +73,8 @@ def main(tasks_json: str = TASKS_JSON) -> dict:
         "all_tasks_completed": False,
     }
 
-    # ── Run the Orchestrator graph ────────────────────────────
     final_state: dict = orchestrator_graph.invoke(initial_state)
 
-    # ── Print generated code snippets ─────────────────────────
     _banner("GENERATED CODE SNIPPETS")
     for result in final_state.get("task_results", []):
         svc = result.get("selected_service", {})

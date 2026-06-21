@@ -8,7 +8,7 @@ db = client['SOLIS_db']
 collection = db["TDs"]
 
 TDs = [
-{
+  {
     "@context": [
       "https://www.w3.org/2019/wot/td.jsonld",
       {
@@ -50,7 +50,7 @@ TDs = [
           "type": "string",
           "description": "Comma-separated string composed by lat,lon coordinates"
         },
-        "readOnly": True
+        "readOnly": "true"
       },
       "address": {
         "@type": "Property",
@@ -169,7 +169,7 @@ TDs = [
             }
           }
         },
-        "readOnly": True
+        "readOnly": "true"
       },
       "summary": {
         "@type": "Property",
@@ -198,7 +198,7 @@ TDs = [
             }
           }
         },
-        "readOnly": True
+        "readOnly": "true"
       }
     },
     "actions": {
@@ -252,8 +252,8 @@ TDs = [
             "returnSpeedLimit": {
               "@type": "DataSchema",
               "type": "boolean",
-              "description": "Enables the return of the posted speed limit (where available). Default value: False",
-              "default": False
+              "description": "Enables the return of the posted speed limit (where available). Default value: false",
+              "default": "false"
             },
             "heading": {
               "@type": "DataSchema",
@@ -278,13 +278,13 @@ TDs = [
               "@type": "DataSchema",
               "type": "boolean",
               "description": "Enables the return of the roadClass array for reverseGeocodes at street level.",
-              "default": False
+              "default": "false"
             },
             "returnRoadUse": {
               "@type": "DataSchema",
               "type": "boolean",
               "description": "Enables the return of the roadUse array for reverseGeocodes at street level. Deprecated support will be removed.",
-              "default": False
+              "default": "false"
             },
             "entityType": {
               "@type": "DataSchema",
@@ -307,14 +307,14 @@ TDs = [
             "allowFreeformNewline": {
               "@type": "DataSchema",
               "type": "boolean",
-              "description": "The format of newlines in the formatted address. If True, the address will contain newlines. Otherwise, newlines will be converted to spaces.",
-              "default": False
+              "description": "The format of newlines in the formatted address. If true, the address will contain newlines. Otherwise, newlines will be converted to spaces.",
+              "default": "false"
             },
             "returnMatchType": {
               "@type": "DataSchema",
               "type": "boolean",
               "description": "This includes information on the type of match the geocoder achieved in the response.",
-              "default": False
+              "default": "false"
             },
             "view": {
               "@type": "DataSchema",
@@ -392,7 +392,7 @@ TDs = [
       "schema": "http://schema.org/"
     },
     "@type": "Thing",
-    "name": "Geoapify Reverse Geocoding API",
+    "title": "Geoapify Reverse Geocoding API",
     "description": "A powerful and easy-to-use Reverse Geocoding API that converts latitude/longitude coordinates to complete address information. Returns well-formed addresses with parts like city, postcode, street for the given coordinates.",
     "securitySchemes": {
       "apikey": {
@@ -402,8 +402,8 @@ TDs = [
         "name": "apiKey"
       }
     },
-    "actions": [
-      {
+    "actions": {
+      "reverseGeocode": {
         "@type": "Action",
         "name": "reverseGeocode",
         "description": "Convert latitude/longitude coordinates to corresponding address information. Returns a GeoJSON FeatureCollection with complete address and its parts.",
@@ -606,9 +606,9 @@ TDs = [
           }
         }
       }
-    ],
-    "properties": [
-      {
+    },
+    "properties": {
+      "servicePurpose": {
         "@type": "Property",
         "name": "servicePurpose",
         "description": "Convert coordinates to address information for location-based services.",
@@ -617,7 +617,7 @@ TDs = [
           "type": "string"
         }
       },
-      {
+      "supportedLocationTypes": {
         "@type": "Property",
         "name": "supportedLocationTypes",
         "description": "List of supported location types for geocoding.",
@@ -637,7 +637,7 @@ TDs = [
           }
         }
       },
-      {
+      "supportedLanguages": {
         "@type": "Property",
         "name": "supportedLanguages",
         "description": "Supported languages for response (ISO 639-1 codes).",
@@ -646,7 +646,7 @@ TDs = [
           "type": "string"
         }
       },
-      {
+      "supportedFormats": {
         "@type": "Property",
         "name": "supportedFormats",
         "description": "Supported response formats.",
@@ -663,7 +663,7 @@ TDs = [
           }
         }
       },
-      {
+      "costModel": {
         "@type": "Property",
         "name": "costModel",
         "description": "1 credit per request. 100 requests costs 100 credits.",
@@ -672,7 +672,7 @@ TDs = [
           "type": "string"
         }
       },
-      {
+      "geographicalCoverage": {
         "@type": "Property",
         "name": "geographicalCoverage",
         "description": "Global coverage with support for city, postcode, country, etc.",
@@ -681,7 +681,7 @@ TDs = [
           "type": "string"
         }
       },
-      {
+      "securityAndPrivacyAspects": {
         "@type": "Property",
         "name": "securityAndPrivacyAspects",
         "description": "API key authentication with optional IP address, HTTP referrer, origins, and CORS protection.",
@@ -690,7 +690,7 @@ TDs = [
           "type": "string"
         }
       },
-      {
+      "performanceCharacteristics": {
         "@type": "Property",
         "name": "performanceCharacteristics",
         "description": "Different execution times and resource capacities required on servers.",
@@ -699,7 +699,7 @@ TDs = [
           "type": "string"
         }
       },
-      {
+      "languageAndLocalization": {
         "@type": "Property",
         "name": "languageAndLocalization",
         "description": "Support for multiple languages via ISO 639-1 language codes.",
@@ -708,7 +708,7 @@ TDs = [
           "type": "string"
         }
       },
-      {
+      "reliabilityAndAvailabilityCharacteristics": {
         "@type": "Property",
         "name": "reliabilityAndAvailabilityCharacteristics",
         "description": "Returns result object with address fields. Some fields may be missing depending on location type.",
@@ -717,8 +717,9 @@ TDs = [
           "type": "string"
         }
       }
-    ]
-  },{
+    }
+  },
+  {
     "@context": [
       "https://www.w3.org/ns/thing",
       "https://w3c.github.io/wot-thing-description-2.0/context.jsonld",
@@ -761,8 +762,8 @@ TDs = [
     "security": [
       "apikey"
     ],
-    "properties": [
-      {
+    "properties": {
+      "Latitude": {
         "@type": "Property",
         "title": "Latitude",
         "description": "Latitude coordinate in WGS84 projection",
@@ -779,9 +780,9 @@ TDs = [
           "maximum": 90,
           "unit": "degrees"
         },
-        "readOnly": True
+        "readOnly": "true"
       },
-      {
+      "Longitude": {
         "@type": "Property",
         "title": "Longitude",
         "description": "Longitude coordinate in WGS84 projection",
@@ -798,9 +799,9 @@ TDs = [
           "maximum": 180,
           "unit": "degrees"
         },
-        "readOnly": True
+        "readOnly": "true"
       },
-      {
+      "Output Format": {
         "@type": "Property",
         "title": "Output Format",
         "description": "Preferred output format for results",
@@ -821,10 +822,10 @@ TDs = [
             "geocodejson"
           ]
         },
-        "readOnly": True,
+        "readOnly": "true",
         "unitOfMeasurement": "language and localization"
       },
-      {
+      "Address Breakdown Level": {
         "@type": "Property",
         "title": "Address Breakdown Level",
         "description": "Include breakdown of address into elements when set to 1",
@@ -840,9 +841,9 @@ TDs = [
           "minimum": 0,
           "maximum": 1
         },
-        "readOnly": True
+        "readOnly": "true"
       },
-      {
+      "Additional Information": {
         "@type": "Property",
         "title": "Additional Information",
         "description": "Include additional information in result (e.g., wikipedia link, opening hours)",
@@ -858,10 +859,10 @@ TDs = [
           "minimum": 0,
           "maximum": 1
         },
-        "readOnly": True,
+        "readOnly": "true",
         "unitOfMeasurement": "reliability and availability characteristics"
       },
-      {
+      "Name Details": {
         "@type": "Property",
         "title": "Name Details",
         "description": "Include full list of names for the result (language variants, older names, references)",
@@ -877,10 +878,10 @@ TDs = [
           "minimum": 0,
           "maximum": 1
         },
-        "readOnly": True,
+        "readOnly": "true",
         "unitOfMeasurement": "reliability and availability characteristics"
       },
-      {
+      "Result Type Restriction": {
         "@type": "Property",
         "title": "Result Type Restriction",
         "description": "Restrict results to specific type (address, poi, railway, natural, manmade)",
@@ -902,9 +903,9 @@ TDs = [
             "address,poi"
           ]
         },
-        "readOnly": True
+        "readOnly": "true"
       },
-      {
+      "Polygon Output Tolerance": {
         "@type": "Property",
         "title": "Polygon Output Tolerance",
         "description": "Tolerance in degrees with which geometry may differ from original geometry",
@@ -920,10 +921,10 @@ TDs = [
           "minimum": 0,
           "maximum": 1
         },
-        "readOnly": True,
+        "readOnly": "true",
         "unitOfMeasurement": "performance characteristics"
       },
-      {
+      "Debug Information": {
         "@type": "Property",
         "title": "Debug Information",
         "description": "Output assorted developer debug information (overrides machine readable format)",
@@ -939,12 +940,12 @@ TDs = [
           "minimum": 0,
           "maximum": 1
         },
-        "readOnly": True,
+        "readOnly": "true",
         "unitOfMeasurement": "reliability and availability characteristics"
       }
-    ],
-    "actions": [
-      {
+    },
+    "actions": {
+      "Reverse Geocode": {
         "@type": "Action",
         "title": "Reverse Geocode",
         "description": "Generates an address from a coordinate given as latitude and longitude. Returns exactly one result or an error when the coordinate is in an area with no OSM data coverage.",
@@ -1158,8 +1159,8 @@ TDs = [
           }
         ]
       }
-    ],
-    "events": [],
+    },
+    "events": {},
     "links": [
       {
         "@type": "Link",
@@ -1197,7 +1198,7 @@ TDs = [
     "servicePurpose": "Reverse geocoding service that generates an address from a coordinate given as latitude and longitude",
     "transportCapability": "convert coordinates to addresses"
   },
-{
+  {
     "@context": {
       "@vocab": "https://www.w3.org/2019/wot/td#",
       "xsd": "http://www.w3.org/2001/XMLSchema#",
@@ -1294,8 +1295,8 @@ TDs = [
         }
       }
     },
-    "actions": [
-      {
+    "actions": {
+      "getForecast": {
         "@type": "Action",
         "name": "getForecast",
         "title": "Weather Forecast API",
@@ -1324,7 +1325,7 @@ TDs = [
           }
         ]
       },
-      {
+      "getHistorical": {
         "@type": "Action",
         "name": "getHistorical",
         "title": "Historical Weather API",
@@ -1337,7 +1338,7 @@ TDs = [
           }
         ]
       },
-      {
+      "getEnsemble": {
         "@type": "Action",
         "name": "getEnsemble",
         "title": "Ensemble Models API",
@@ -1350,7 +1351,7 @@ TDs = [
           }
         ]
       },
-      {
+      "getClimate": {
         "@type": "Action",
         "name": "getClimate",
         "title": "Climate Change API",
@@ -1363,7 +1364,7 @@ TDs = [
           }
         ]
       },
-      {
+      "getMarine": {
         "@type": "Action",
         "name": "getMarine",
         "title": "Marine Weather API",
@@ -1376,7 +1377,7 @@ TDs = [
           }
         ]
       },
-      {
+      "getAirQuality": {
         "@type": "Action",
         "name": "getAirQuality",
         "title": "Air Quality API",
@@ -1389,7 +1390,7 @@ TDs = [
           }
         ]
       },
-      {
+      "getFloods": {
         "@type": "Action",
         "name": "getFloods",
         "title": "Flood API",
@@ -1402,7 +1403,7 @@ TDs = [
           }
         ]
       },
-      {
+      "getElevation": {
         "@type": "Action",
         "name": "getElevation",
         "title": "Elevation API",
@@ -1415,20 +1416,7 @@ TDs = [
           }
         ]
       },
-      {
-        "@type": "Action",
-        "name": "getGeocoding",
-        "title": "Geocoding API",
-        "description": "Resolve city names to precise coordinates.",
-        "forms": [
-          {
-            "href": "https://api.open-meteo.com/v1/geocoding",
-            "op": "invokeaction",
-            "htv:methodName": "GET"
-          }
-        ]
-      },
-      {
+      "getTimezone": {
         "@type": "Action",
         "name": "getTimezone",
         "title": "Timezone API",
@@ -1441,7 +1429,7 @@ TDs = [
           }
         ]
       }
-    ],
+    },
     "links": [
       {
         "href": "https://open-meteo.com/en/features#available_apis",
@@ -1473,7 +1461,7 @@ TDs = [
         "description": "Specialised forecasts for solar radiation, wind, transpiration, soil moisture, waves, and air quality."
       }
     }
-  }, 
+  },
   {
     "@context": [
       "https://www.w3.org/2022/wot/td/v1.1",
@@ -1711,7 +1699,7 @@ TDs = [
       "auto_complete": {
         "@type": "Property",
         "title": "Autocomplete Mode",
-        "description": "Enable Autocomplete Mode by setting the value to True",
+        "description": "Enable Autocomplete Mode by setting the value to true",
         "forms": [
           {
             "href": "https://api.mapbox.com/search/searchbox/v1/forward",
@@ -1722,7 +1710,7 @@ TDs = [
           "@type": "DataSchema",
           "type": "string",
           "enum": [
-            "True"
+            "true"
           ],
           "description": "When enabled, search results will include partial and fuzzy matches. Suitable for autocomplete implementations."
         }
@@ -1899,7 +1887,7 @@ TDs = [
               "minLength": 1,
               "maxLength": 256
             },
-            "required": True
+            "required": "true"
           },
           {
             "@type": "DataSchema",
@@ -1907,7 +1895,7 @@ TDs = [
             "schema": {
               "type": "string"
             },
-            "required": True
+            "required": "true"
           }
         ],
         "output": [
@@ -2213,7 +2201,7 @@ TDs = [
             "schema": {
               "type": "string"
             },
-            "required": True
+            "required": "true"
           },
           {
             "@type": "DataSchema",
@@ -2221,7 +2209,7 @@ TDs = [
             "schema": {
               "type": "string"
             },
-            "required": True
+            "required": "true"
           }
         ],
         "output": [
@@ -2378,7 +2366,7 @@ TDs = [
             "schema": {
               "type": "string"
             },
-            "required": True
+            "required": "true"
           },
           {
             "@type": "DataSchema",
@@ -2386,7 +2374,7 @@ TDs = [
             "schema": {
               "type": "string"
             },
-            "required": True
+            "required": "true"
           }
         ],
         "output": [
@@ -2685,7 +2673,7 @@ TDs = [
             "schema": {
               "type": "string"
             },
-            "required": True
+            "required": "true"
           },
           {
             "@type": "DataSchema",
@@ -2693,7 +2681,7 @@ TDs = [
             "schema": {
               "type": "string"
             },
-            "required": True
+            "required": "true"
           }
         ],
         "output": [
@@ -2893,7 +2881,7 @@ TDs = [
             "schema": {
               "type": "string"
             },
-            "required": True
+            "required": "true"
           },
           {
             "@type": "DataSchema",
@@ -2962,7 +2950,7 @@ TDs = [
             "schema": {
               "type": "string"
             },
-            "required": True
+            "required": "true"
           },
           {
             "@type": "DataSchema",
@@ -2970,7 +2958,7 @@ TDs = [
             "schema": {
               "type": "number"
             },
-            "required": True
+            "required": "true"
           },
           {
             "@type": "DataSchema",
@@ -2978,7 +2966,7 @@ TDs = [
             "schema": {
               "type": "number"
             },
-            "required": True
+            "required": "true"
           }
         ],
         "output": [
@@ -3284,4 +3272,5 @@ TDs = [
     ]
   }
 ]
+
 result  = collection.insert_many(TDs)

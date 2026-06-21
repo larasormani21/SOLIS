@@ -1,14 +1,3 @@
-"""
-service_selection.py – Service Selection Agent
-
-Queries the local service repository to find transport services
-that match the current mobility task.
-
-Outputs (written to WorkerState):
-    query_result      – list of matching service dicts (if found)
-    no_service_found  – True when the repository has no match
-"""
-
 from __future__ import annotations
 import pymongo, json
 from config import build_llm_from_model_and_temperature, mongo_uri, testing_mode, testing_mode_agents
@@ -133,15 +122,13 @@ def query_service_repository(query: str) -> list[dict]:
 
 def service_selection_agent(state: WorkerState) -> dict:
     """
-    LangGraph node – Service Selection Agent.
+    Behavior:
+    Queries the local service repository to find services that match the
+    current task.
 
-    Receives current_task from the WorkerState and queries the local
-    service repository (e.g. a WoT Thing Directory, a vector store,
-    or a REST service registry).
-
-    Returns a partial WorkerState update:
-      • {no_service_found: True,  query_result: None}     – no match
-      • {no_service_found: False, query_result: [...]  }  – match(es) found
+    Outputs (written to WorkerState):
+    - query_result: list of matching service dicts (if found)
+    - no_service_found: True when the repository has no match
     """
     task = state["current_task"]
     tid  = task.get("id", "?")
@@ -181,34 +168,3 @@ def service_selection_agent(state: WorkerState) -> dict:
         """
 
         return {"no_service_found": False, "query_result": query_results}
-
-    """
-    _simulate_found: bool = True
-
-    if not _simulate_found:
-        print("  ✗ No matching service found in repository.")
-        return {"no_service_found": True, "query_result": None}
-
-    # Simulated repository results (used when _simulate_found=True)
-    services: list[dict] = [
-        {
-            "service_id":      "atm_metro_001",
-            "name":            "ATM Metro Milano",
-            "transport_modes": ["metro"],
-            "coverage":        "Milan metropolitan area",
-            "endpoint":        "https://api.atm.it/v1/journey-planner",
-            "score":           0.95,
-        },
-        {
-            "service_id":      "trenord_regional_001",
-            "name":            "Trenord Regional Rail",
-            "transport_modes": ["rail", "metro"],
-            "coverage":        "Lombardy region",
-            "endpoint":        "https://api.trenord.it/v1/journey",
-            "score":           0.72,
-        },
-    ]
-
-    print(f"  ✓ Found {len(services)} service(s) in repository.")
-    return {"no_service_found": False, "query_result": services}
-    """

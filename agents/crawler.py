@@ -1,26 +1,14 @@
-"""
-crawler.py – Crawler Agent (LangGraph Node)
-
-FLOW:
-1. LLM generates search query
-2. Tavily returns ONLY 1 seed URL
-3. Crawl internal documentation pages from that URL
-4. Human selects which crawled pages to keep
-5. Output structured dataset [{url, blocks}]
-"""
-
 from __future__ import annotations
 import requests
 
-from typing import List, Dict, Set
-from pathlib import Path
+from typing import List, Set
 from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup
 from tavily import TavilyClient
 
 from schemas import WorkerState
-from config import build_llm_from_model_and_temperature #tavily_api_key
+from config import build_llm_from_model_and_temperature, tavily_api_key
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; CleanScraper/1.0)"
@@ -30,10 +18,6 @@ HEADERS = {
 MAX_DOC_PAGES = 8
 visited: Set[str] = set()
 
-
-# ----------------------------
-# LLM: SEARCH QUERY
-# ----------------------------
 
 def build_search_query(llm, task: dict) -> str:
     prompt = f"""
@@ -194,13 +178,12 @@ def select_pages_cli(pages: List[dict]) -> List[dict]:
 
 def crawler_agent(state: WorkerState) -> dict:
     """
-    LangGraph node:
-
-    1. build query
-    2. Tavily → 1 seed URL
-    3. crawl documentation tree
-    4. human selects pages
-    5. return structured dataset
+    Behavior:
+    1. LLM generates search query
+    2. Tavily returns a seed URL
+    3. Crawl internal documentation pages from that URL
+    4. Human selects which crawled pages to keep
+    5. Output structured dataset [{url, blocks}]
     """
 
     task = state["current_task"]
